@@ -1,0 +1,30 @@
+#�˿�����
+server:
+  port: 8080
+
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/mxonline?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: zhang123456
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  http:
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: true
+
+
+
+
+mybatis:
+  type-aliases-package: com.bs.model
+  mapper-locations: classpath:mapper/*.xml
+
+
+logging:
+  level: info
+
+

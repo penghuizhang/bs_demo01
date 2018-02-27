@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bs.mapper.CoursesCourseMapper">
+  <resultMap id="BaseResultMap" type="com.bs.model.CoursesCourse">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="degree" jdbcType="VARCHAR" property="degree" />
+    <result column="learn_time" jdbcType="INTEGER" property="learnTime" />
+    <result column="students" jdbcType="INTEGER" property="students" />
+    <result column="favorite_student" jdbcType="INTEGER" property="favoriteStudent" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="click_numbers" jdbcType="INTEGER" property="clickNumbers" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="course_org_id" jdbcType="INTEGER" property="courseOrgId" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="tag" jdbcType="VARCHAR" property="tag" />
+    <result column="course_category_id" jdbcType="INTEGER" property="courseCategoryId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.bs.model.CoursesCourse">
+    <result column="details" jdbcType="LONGVARCHAR" property="details" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, description, degree, learn_time, students, favorite_student, image, click_numbers, 
+    add_time, course_org_id, category, tag, course_category_id
+  </sql>
+  <sql id="Blob_Column_List">
+    details
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from courses_course
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from courses_course
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bs.model.CoursesCourse">
+    insert into courses_course (id, name, description, 
+      degree, learn_time, students, 
+      favorite_student, image, click_numbers, 
+      add_time, course_org_id, category, 
+      tag, course_category_id, details
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{degree,jdbcType=VARCHAR}, #{learnTime,jdbcType=INTEGER}, #{students,jdbcType=INTEGER}, 
+      #{favoriteStudent,jdbcType=INTEGER}, #{image,jdbcType=VARCHAR}, #{clickNumbers,jdbcType=INTEGER}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{courseOrgId,jdbcType=INTEGER}, #{category,jdbcType=VARCHAR}, 
+      #{tag,jdbcType=VARCHAR}, #{courseCategoryId,jdbcType=INTEGER}, #{details,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bs.model.CoursesCourse">
+    insert into courses_course
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="degree != null">
+        degree,
+      </if>
+      <if test="learnTime != null">
+        learn_time,
+      </if>
+      <if test="students != null">
+        students,
+      </if>
+      <if test="favoriteStudent != null">
+        favorite_student,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="clickNumbers != null">
+        click_numbers,
+      </if>
+      <if test="addTime != null">
+        add_time,
+      </if>
+      <if test="courseOrgId != null">
+        course_org_id,
+      </if>
+      <if test="category != null">
+        category,
+      </if>
+      <if test="tag != null">
+        tag,
+      </if>
+      <if test="courseCategoryId != null">
+        course_category_id,
+      </if>
+      <if test="details != null">
+        details,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="learnTime != null">
+        #{learnTime,jdbcType=INTEGER},
+      </if>
+      <if test="students != null">
+        #{students,jdbcType=INTEGER},
+      </if>
+      <if test="favoriteStudent != null">
+        #{favoriteStudent,jdbcType=INTEGER},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="clickNumbers != null">
+        #{clickNumbers,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="courseOrgId != null">
+        #{courseOrgId,jdbcType=INTEGER},
+      </if>
+      <if test="category != null">
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null">
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="courseCategoryId != null">
+        #{courseCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="details != null">
+        #{details,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bs.model.CoursesCourse">
+    update courses_course
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        degree = #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="learnTime != null">
+        learn_time = #{learnTime,jdbcType=INTEGER},
+      </if>
+      <if test="students != null">
+        students = #{students,jdbcType=INTEGER},
+      </if>
+      <if test="favoriteStudent != null">
+        favorite_student = #{favoriteStudent,jdbcType=INTEGER},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="clickNumbers != null">
+        click_numbers = #{clickNumbers,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="courseOrgId != null">
+        course_org_id = #{courseOrgId,jdbcType=INTEGER},
+      </if>
+      <if test="category != null">
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null">
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="courseCategoryId != null">
+        course_category_id = #{courseCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="details != null">
+        details = #{details,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bs.model.CoursesCourse">
+    update courses_course
+    set name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      degree = #{degree,jdbcType=VARCHAR},
+      learn_time = #{learnTime,jdbcType=INTEGER},
+      students = #{students,jdbcType=INTEGER},
+      favorite_student = #{favoriteStudent,jdbcType=INTEGER},
+      image = #{image,jdbcType=VARCHAR},
+      click_numbers = #{clickNumbers,jdbcType=INTEGER},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      course_org_id = #{courseOrgId,jdbcType=INTEGER},
+      category = #{category,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=VARCHAR},
+      course_category_id = #{courseCategoryId,jdbcType=INTEGER},
+      details = #{details,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bs.model.CoursesCourse">
+    update courses_course
+    set name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      degree = #{degree,jdbcType=VARCHAR},
+      learn_time = #{learnTime,jdbcType=INTEGER},
+      students = #{students,jdbcType=INTEGER},
+      favorite_student = #{favoriteStudent,jdbcType=INTEGER},
+      image = #{image,jdbcType=VARCHAR},
+      click_numbers = #{clickNumbers,jdbcType=INTEGER},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      course_org_id = #{courseOrgId,jdbcType=INTEGER},
+      category = #{category,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=VARCHAR},
+      course_category_id = #{courseCategoryId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.bs.model.CoursesCourse">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="degree" jdbcType="VARCHAR" property="degree" />
+    <result column="learn_time" jdbcType="INTEGER" property="learnTime" />
+    <result column="students" jdbcType="INTEGER" property="students" />
+    <result column="favorite_student" jdbcType="INTEGER" property="favoriteStudent" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="click_numbers" jdbcType="INTEGER" property="clickNumbers" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="course_org_id" jdbcType="INTEGER" property="courseOrgId" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="tag" jdbcType="VARCHAR" property="tag" />
+    <result column="course_category_id" jdbcType="INTEGER" property="courseCategoryId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.bs.model.CoursesCourse">
+    <result column="details" jdbcType="LONGVARCHAR" property="details" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, description, degree, learn_time, students, favorite_student, image, click_numbers, 
+    add_time, course_org_id, category, tag, course_category_id
+  </sql>
+  <sql id="Blob_Column_List">
+    details
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from courses_course
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from courses_course
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bs.model.CoursesCourse">
+    insert into courses_course (id, name, description, 
+      degree, learn_time, students, 
+      favorite_student, image, click_numbers, 
+      add_time, course_org_id, category, 
+      tag, course_category_id, details
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{degree,jdbcType=VARCHAR}, #{learnTime,jdbcType=INTEGER}, #{students,jdbcType=INTEGER}, 
+      #{favoriteStudent,jdbcType=INTEGER}, #{image,jdbcType=VARCHAR}, #{clickNumbers,jdbcType=INTEGER}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{courseOrgId,jdbcType=INTEGER}, #{category,jdbcType=VARCHAR}, 
+      #{tag,jdbcType=VARCHAR}, #{courseCategoryId,jdbcType=INTEGER}, #{details,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bs.model.CoursesCourse">
+    insert into courses_course
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="degree != null">
+        degree,
+      </if>
+      <if test="learnTime != null">
+        learn_time,
+      </if>
+      <if test="students != null">
+        students,
+      </if>
+      <if test="favoriteStudent != null">
+        favorite_student,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="clickNumbers != null">
+        click_numbers,
+      </if>
+      <if test="addTime != null">
+        add_time,
+      </if>
+      <if test="courseOrgId != null">
+        course_org_id,
+      </if>
+      <if test="category != null">
+        category,
+      </if>
+      <if test="tag != null">
+        tag,
+      </if>
+      <if test="courseCategoryId != null">
+        course_category_id,
+      </if>
+      <if test="details != null">
+        details,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="learnTime != null">
+        #{learnTime,jdbcType=INTEGER},
+      </if>
+      <if test="students != null">
+        #{students,jdbcType=INTEGER},
+      </if>
+      <if test="favoriteStudent != null">
+        #{favoriteStudent,jdbcType=INTEGER},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="clickNumbers != null">
+        #{clickNumbers,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="courseOrgId != null">
+        #{courseOrgId,jdbcType=INTEGER},
+      </if>
+      <if test="category != null">
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null">
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="courseCategoryId != null">
+        #{courseCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="details != null">
+        #{details,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bs.model.CoursesCourse">
+    update courses_course
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        degree = #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="learnTime != null">
+        learn_time = #{learnTime,jdbcType=INTEGER},
+      </if>
+      <if test="students != null">
+        students = #{students,jdbcType=INTEGER},
+      </if>
+      <if test="favoriteStudent != null">
+        favorite_student = #{favoriteStudent,jdbcType=INTEGER},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="clickNumbers != null">
+        click_numbers = #{clickNumbers,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="courseOrgId != null">
+        course_org_id = #{courseOrgId,jdbcType=INTEGER},
+      </if>
+      <if test="category != null">
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null">
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="courseCategoryId != null">
+        course_category_id = #{courseCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="details != null">
+        details = #{details,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bs.model.CoursesCourse">
+    update courses_course
+    set name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      degree = #{degree,jdbcType=VARCHAR},
+      learn_time = #{learnTime,jdbcType=INTEGER},
+      students = #{students,jdbcType=INTEGER},
+      favorite_student = #{favoriteStudent,jdbcType=INTEGER},
+      image = #{image,jdbcType=VARCHAR},
+      click_numbers = #{clickNumbers,jdbcType=INTEGER},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      course_org_id = #{courseOrgId,jdbcType=INTEGER},
+      category = #{category,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=VARCHAR},
+      course_category_id = #{courseCategoryId,jdbcType=INTEGER},
+      details = #{details,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bs.model.CoursesCourse">
+    update courses_course
+    set name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      degree = #{degree,jdbcType=VARCHAR},
+      learn_time = #{learnTime,jdbcType=INTEGER},
+      students = #{students,jdbcType=INTEGER},
+      favorite_student = #{favoriteStudent,jdbcType=INTEGER},
+      image = #{image,jdbcType=VARCHAR},
+      click_numbers = #{clickNumbers,jdbcType=INTEGER},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      course_org_id = #{courseOrgId,jdbcType=INTEGER},
+      category = #{category,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=VARCHAR},
+      course_category_id = #{courseCategoryId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
