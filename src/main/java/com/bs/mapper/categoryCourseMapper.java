@@ -11,11 +11,15 @@ public interface categoryCourseMapper {
 
     int insertSelective(CategoryCourse record);
 
-    CategoryCourse selectByPrimaryKey(Integer id);
+    String findCategoryNameById(Integer id) throws  Exception;
 
     int updateByPrimaryKeySelective(CategoryCourse record);
 
     int updateByPrimaryKey(CategoryCourse record);
 
-    List<CategoryCourse> selectByIdFindName(int id) throws Exception;
+    List findCourseListName() throws  Exception;
+
+    List<CategoryCourse> findCourseListById(int id) throws Exception;
+
+
 }

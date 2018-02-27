@@ -5,7 +5,8 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="desc" jdbcType="VARCHAR" property="desc" />
-    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="add_time" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
   </resultMap>
   <sql id="Base_Column_List">
     id, name, desc, add_time
@@ -80,8 +81,19 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="selectByIdFindName" parameterType="java.lang.Integer" resultType="java.lang.String">
+  <select id="findCategoryNameById" parameterType="java.lang.Integer" resultType="java.lang.String">
       select name from category_coursecategory where id=#{id,jdbcType=INTEGER }
 
+  </select>
+
+  <select id="findCourseListById" parameterType="java.lang.Integer" resultType="com.bs.model.Courses">
+    select *
+ from category_coursecategory as category RIGHT JOIN courses_course as course
+				on category.id = course.course_category_id
+				where category.id =  #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="findCourseListName" resultMap="BaseResultMap">
+    select id, name,image from category_coursecategory
   </select>
 </mapper>

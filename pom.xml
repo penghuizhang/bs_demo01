@@ -55,6 +55,12 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.14.8</version>
+		</dependency>
+
 		<!-- 阿里巴巴连接池Druid -->
 		<dependency>
 			<groupId>com.alibaba</groupId>

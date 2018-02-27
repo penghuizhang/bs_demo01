@@ -18,12 +18,18 @@ public class categoryServiceImpl implements CategoryService {
     private categoryCourseMapper categoryCoursecategoryMapper;
 
     @Override
-    public List<CategoryCourse> findCategoryById(int id) throws Exception {
-        return (List<CategoryCourse>) categoryCoursecategoryMapper.selectByPrimaryKey(id);
+    public String findCategoryNameById(int id) throws Exception {
+        return categoryCoursecategoryMapper.findCategoryNameById(id);
     }
 
     @Override
-    public List<CategoryCourse> selectByIdFindName(int id) throws Exception {
-        return categoryCoursecategoryMapper.selectByIdFindName(id);
+    public List<CategoryCourse> findCourseListById(int id) throws Exception {
+        List<CategoryCourse> categoryCourses = categoryCoursecategoryMapper.findCourseListById(id);
+        return categoryCoursecategoryMapper.findCourseListById(id);
+    }
+
+    @Override
+    public List findCourseListName() throws Exception {
+        return categoryCoursecategoryMapper.findCourseListName();
     }
 }

@@ -38,16 +38,25 @@ public class categoryController {
     @GetMapping(value = "/course/category/lists/{id}")
     public Result CategoryCoursecategory(@PathVariable("id") Integer id ) throws Exception{
 
-        categoryCoursecategory = new CategoryCourse();
-        categoryCoursecategoryList = categoryService.selectByIdFindName(id);
+        String categoryName = categoryService.findCategoryNameById(id);
 
-      return  ResultUtil.success(categoryCoursecategoryList);
+      return  ResultUtil.success(categoryName);
     }
 
 
+    /**
+     * 通过id获取该分类下所有的课程
+     */
     @GetMapping(value = "/course/category/{id}/lists")
     public Result<CategoryCourse> getCategoryCourse(@PathVariable("id") Integer id) throws Exception{
+        return ResultUtil.success(categoryService.findCourseListById(id));
+    }
 
-
+    /**
+     * 获取到分类列表
+     */
+    @GetMapping(value = "course/category")
+    public Result findCourseListName() throws Exception{
+        return ResultUtil.success(categoryService.findCourseListName());
     }
 }

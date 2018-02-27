@@ -10,7 +10,19 @@ import java.util.List;
  */
 public interface CategoryService {
 
-    public List<CategoryCourse> findCategoryById(int id) throws Exception;
+    /**
+     * 通过id进行获取到分类
+     * @return   一个分类名称
+     */
+    String  findCategoryNameById(int id) throws Exception;
 
-    public List<CategoryCourse> selectByIdFindName(int id) throws Exception;
+    /**
+     * 通过id获取到该分类下面的所有课程
+     */
+    public List<CategoryCourse> findCourseListById(int id) throws Exception;
+
+    /**
+     * 获取分类类表
+     */
+    public List findCourseListName() throws Exception;
 }
