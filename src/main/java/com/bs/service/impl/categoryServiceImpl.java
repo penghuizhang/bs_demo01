@@ -1,11 +1,13 @@
 package com.bs.service.impl;
 
 import com.bs.mapper.categoryCourseMapper;
-import com.bs.model.CategoryCourse;
+
+import com.bs.model.Courses;
 import com.bs.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,9 +25,18 @@ public class categoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryCourse> findCourseListById(int id) throws Exception {
-        List<CategoryCourse> categoryCourses = categoryCoursecategoryMapper.findCourseListById(id);
-        return categoryCoursecategoryMapper.findCourseListById(id);
+    public List<Courses> findCourseListById(int id) throws Exception {
+        String url = "http://kylin5221.free.ngrok.cc/media/";
+        List<Courses> categoryCourses = categoryCoursecategoryMapper.findCourseListById(id);
+        List<Courses> categoryCourseslist = new ArrayList<>();
+        for(Courses category:categoryCourses){
+//            http://kylin5221.free.ngrok.cc
+             category.setImage( url+category.getImage());
+            categoryCourseslist.add(category);
+            System.out.println(categoryCourseslist);
+        }
+
+        return categoryCourseslist;
     }
 
     @Override

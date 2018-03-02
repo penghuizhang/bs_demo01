@@ -1,6 +1,7 @@
 package com.bs.service;
 
 import com.bs.model.CategoryCourse;
+import com.bs.model.Courses;
 import com.bs.model.Result;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface CategoryService {
     /**
      * 通过id获取到该分类下面的所有课程
      */
-    public List<CategoryCourse> findCourseListById(int id) throws Exception;
+    public List<Courses> findCourseListById(int id) throws Exception;
 
     /**
      * 获取分类类表

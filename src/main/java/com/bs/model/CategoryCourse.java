@@ -20,4 +20,6 @@ public class CategoryCourse {
 
     private String image;
 
+    private String nick;
+
 }
