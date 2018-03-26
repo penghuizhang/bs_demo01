@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bs.mapper.CourseNoteMapper">
+  <resultMap id="BaseResultMap" type="com.bs.model.CourseNote">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="add_time" />
+    <result column="course" jdbcType="INTEGER" property="course" />
+    <result column="user_id" jdbcType="INTEGER" property="user_id" />
+    <result column="note_message" jdbcType="VARCHAR" property="note_message" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, course, note_message,add_time,userAccount,user_id
+  </sql>
+
+  <!--添加一条记录-->
+  <insert id="addOneNote" parameterType="com.bs.model.CourseNote">
+    insert into operation_usernotecomment ( course, note_message,add_time, user_id)
+    values (#{course,jdbcType=INTEGER}, #{note_message,jdbcType=VARCHAR},
+      #{add_time,jdbcType=VARCHAR}, #{user_id,jdbcType=INTEGER})
+  </insert>
+
+
+  <!--查询课程id-->
+  <select id="FindCourseIdByLessonId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select course_id  from courses_lesson
+      where id = #{id}
+  </select>
+
+
+  <select id="findNoteListByCourseId" parameterType="java.lang.Integer" resultType="com.bs.model.pojo.Note_User_course_pojo">
+    SELECT operation_usernotecomment.note_message, users_userprofile.image_url,users_userprofile.nick_name,
+            operation_usernotecomment.user_id,users_userprofile.id
+        FROM    operation_usernotecomment
+
+        INNER JOIN users_userprofile
+        ON operation_usernotecomment.user_id = users_userprofile.id
+    WHERE
+           operation_usernotecomment.course=#{course,jdbcType=INTEGER}
+    limit 0, 4
+  </select>
+
+
+  <select id="FindUserIdByOpenId" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select id from users_userprofile
+       where userAccount=#{user_id,jdbcType=VARCHAR}
+  </select>
+</mapper>

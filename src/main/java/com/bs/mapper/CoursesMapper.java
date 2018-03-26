@@ -13,13 +13,17 @@ public interface CoursesMapper {
 
     Courses selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(Courses record);
-
-    int updateByPrimaryKeyWithBLOBs(Courses record);
-
-    int updateByPrimaryKey(Courses record);
-
     String selectByIdFindName(Integer id) throws Exception;
 
     List<Courses> findCourseListById(Integer id) throws Exception;
+
+
+    //获取轮播图
+    List<Courses> FindCourseImageToLunbo() throws Exception;
+
+    //获取根据时间首页列表
+    List<Courses> FindCourseByOrderTime() throws Exception;
+
+    //根据学习点击率进行排序
+    List<Courses> FindCourseByHot() throws Exception;
 }

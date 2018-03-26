@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bs.mapper.CoursesRecordRecordMapper">
+  <!--<resultMap id="BaseResultMap" type="com.bs.model.CourseRecord">-->
+    <!--<id column="id" jdbcType="INTEGER" property="id" />-->
+    <!--<result column="name" jdbcType="VARCHAR" property="name" />-->
+    <!--<result column="add_time" jdbcType="TIMESTAMP" property="add_time" />-->
+    <!--<result column="lesson_id" jdbcType="INTEGER" property="lesson_id" />-->
+    <!--<result column="user_id" jdbcType="VARCHAR" property="user_id" />-->
+    <!--<result column="video_url" jdbcType="VARCHAR" property="video_url" />-->
+  <!--</resultMap>-->
+  <!--<sql id="Base_Column_List">-->
+    <!--id, name, add_time,  lesson_id,user_id,video_url-->
+  <!--</sql>-->
+  <!--<select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--,-->
+    <!--<include refid="Blob_Column_List" />-->
+    <!--from courses_lessonrecord-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">-->
+    <!--delete from courses_lessonrecord-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.bs.model.CoursesRecord">-->
+    <!--insert into courses_lessonrecord (id, name, add_time,lesson_id, user_id, video_url-->
+      <!--)-->
+    <!--values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},#{add_time,jdbcType=TIMESTAMP},-->
+     <!--#{lesson_id,jdbcType=INTEGER},  #{user_id,jdbcType=VARCHAR}, #{video_url,jdbcType=VARCHAR}-->
+      <!--)-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.bs.model.CoursesRecord">-->
+    <!--insert into courses_lessonrecord-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides=",">-->
+      <!--<if test="id != null">-->
+        <!--id,-->
+      <!--</if>-->
+      <!--<if test="name != null">-->
+        <!--name,-->
+      <!--</if>-->
+      <!--<if test="add_time != null">-->
+        <!--add_time,-->
+      <!--</if>-->
+      <!--<if test="lesson_id != null">-->
+        <!--lesson_id,-->
+      <!--</if>-->
+      <!--<if test="user_id != null">-->
+        <!--user_id,-->
+      <!--</if>-->
+      <!--<if test="video_url != null">-->
+        <!--video_url,-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.bs.model.CoursesRecord">-->
+    <!--update courses_lessonrecord-->
+    <!--<set>-->
+      <!--<if test="name != null">-->
+        <!--name = #{name,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="add_time != null">-->
+        <!--add_time = #{add_time,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="lesson_id != null">-->
+        <!--lesson_id = #{lesson_id,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="user_id != null">-->
+        <!--user_id = #{user_id,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="video_url != null">-->
+        <!--video_url = #{students,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bs.model.CoursesRecord">-->
+    <!--update courses_lessonrecord-->
+    <!--set name = #{name,jdbcType=VARCHAR},-->
+      <!--add_time = #{add_time,jdbcType=VARCHAR},-->
+      <!--lesson_id = #{lesson_id,jdbcType=INTEGER},-->
+      <!--user_id = #{user_id,jdbcType=VARCHAR},-->
+      <!--video_url = #{video_url,jdbcType=VARCHAR}-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.bs.model.CoursesRecord">-->
+    <!--update courses_lessonrecord-->
+    <!--set name = #{name,jdbcType=VARCHAR},-->
+      <!--add_time = #{add_time,jdbcType=VARCHAR},-->
+      <!--lesson_id = #{lesson_id,jdbcType=INTEGER},-->
+      <!--user_id = #{user_id,jdbcType=VARCHAR},-->
+      <!--video_url = #{video_url,jdbcType=VARCHAR}-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+
+</mapper>

@@ -150,88 +150,15 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.bs.model.Courses">
-    update courses_course
-    <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null">
-        description = #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="degree != null">
-        degree = #{degree,jdbcType=VARCHAR},
-      </if>
-      <if test="learnTime != null">
-        learn_time = #{learnTime,jdbcType=INTEGER},
-      </if>
-      <if test="students != null">
-        students = #{students,jdbcType=INTEGER},
-      </if>
-      <if test="favoriteStudent != null">
-        favorite_student = #{favoriteStudent,jdbcType=INTEGER},
-      </if>
-      <if test="image != null">
-        image = #{image,jdbcType=VARCHAR},
-      </if>
-      <if test="clickNumbers != null">
-        click_numbers = #{clickNumbers,jdbcType=INTEGER},
-      </if>
-      <if test="addTime != null">
-        add_time = #{addTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="courseOrgId != null">
-        course_org_id = #{courseOrgId,jdbcType=INTEGER},
-      </if>
-      <if test="category != null">
-        category = #{category,jdbcType=VARCHAR},
-      </if>
-      <if test="tag != null">
-        tag = #{tag,jdbcType=VARCHAR},
-      </if>
-      <if test="courseCategoryId != null">
-        course_category_id = #{courseCategoryId,jdbcType=INTEGER},
-      </if>
-      <if test="details != null">
-        details = #{details,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bs.model.Courses">
-    update courses_course
-    set name = #{name,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
-      degree = #{degree,jdbcType=VARCHAR},
-      learn_time = #{learnTime,jdbcType=INTEGER},
-      students = #{students,jdbcType=INTEGER},
-      favorite_student = #{favoriteStudent,jdbcType=INTEGER},
-      image = #{image,jdbcType=VARCHAR},
-      click_numbers = #{clickNumbers,jdbcType=INTEGER},
-      add_time = #{addTime,jdbcType=TIMESTAMP},
-      course_org_id = #{courseOrgId,jdbcType=INTEGER},
-      category = #{category,jdbcType=VARCHAR},
-      tag = #{tag,jdbcType=VARCHAR},
-      course_category_id = #{courseCategoryId,jdbcType=INTEGER},
-      details = #{details,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.bs.model.Courses">
-    update courses_course
-    set name = #{name,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
-      degree = #{degree,jdbcType=VARCHAR},
-      learn_time = #{learnTime,jdbcType=INTEGER},
-      students = #{students,jdbcType=INTEGER},
-      favorite_student = #{favoriteStudent,jdbcType=INTEGER},
-      image = #{image,jdbcType=VARCHAR},
-      click_numbers = #{clickNumbers,jdbcType=INTEGER},
-      add_time = #{addTime,jdbcType=TIMESTAMP},
-      course_org_id = #{courseOrgId,jdbcType=INTEGER},
-      category = #{category,jdbcType=VARCHAR},
-      tag = #{tag,jdbcType=VARCHAR},
-      course_category_id = #{courseCategoryId,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
 
+
+  <select id="FindCourseImageToLunbo" resultType="com.bs.model.Courses">
+    select  image,id  from courses_course where lunBo = 1
+  </select>
+
+  <select id="FindCourseByOrderTime" resultType="com.bs.model.Courses">
+    select id, name, image, description, details,degree,students from courses_course
+      GROUP BY id ORDER BY add_time DESC
+      limit 0, 5
+  </select>
 </mapper>

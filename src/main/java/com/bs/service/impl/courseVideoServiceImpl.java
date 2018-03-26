@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.xml.ws.Action;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by kylin on 2018/3/4.
@@ -20,9 +22,12 @@ public class courseVideoServiceImpl implements courseVideoService {
     private CoursesVideoMapper coursesVideoMapper;
 
     @Override
-    public CoursesVideo selectByPrimaryKey(Integer id) {
-       CoursesVideo coursesVideo = coursesVideoMapper.selectByPrimaryKey(id);
-       coursesVideo.setVideo_url(constData.serverResourseUrl+coursesVideo.getVideo_url());
+    public CoursesVideo FindUrlByLessonInAndId(Integer lesson_id, Integer id) throws Exception {
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("lesson_id",lesson_id);
+        map.put("id",id);
+        CoursesVideo coursesVideo = coursesVideoMapper.FindUrlByLessonInAndId(map);
+        coursesVideo.setVideo_url(constData.serverResourseUrl+coursesVideo.getVideo_url());
         return coursesVideo;
     }
 }

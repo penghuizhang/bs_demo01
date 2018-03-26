@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bs.mapper.pojo.course_video_mapper">
+    <resultMap id="LessonResultMap" type="com.bs.model.pojo.Lesson_video_pojo">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="lesson_id" jdbcType="INTEGER" property="lesson_id" />
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <collection property="coursesVideo" column="lesson_id" javaType="ArrayList"
+                    ofType="com.bs.model.CoursesVideo" select="getVideoList" />
+    </resultMap>
+
+    <resultMap id="VideoResultMap" type="com.bs.model.CoursesVideo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="lesson_id" jdbcType="INTEGER" property="lesson_id" />
+        <result column="video_url" jdbcType="VARCHAR" property="video_url" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+    </resultMap>
+
+  <select id="findCourseListById" resultMap="LessonResultMap" parameterType="java.lang.Integer">
+      select course.id,lesson.id as lesson_id, lesson.name
+          from  courses_course as course
+          RIGHT JOIN  courses_lesson as lesson
+          on  course.id = lesson.course_id
+          where course.id=#{id, jdbcType=INTEGER}
+  </select>
+
+    <select id="getVideoList" resultMap="VideoResultMap" parameterType="java.lang.Integer">
+        select id,lesson_id, video_url,name
+         from courses_video where lesson_id=#{lesson_id,jdbcType=INTEGER}
+    </select>
+
+</mapper>

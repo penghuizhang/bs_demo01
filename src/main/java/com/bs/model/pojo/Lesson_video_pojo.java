@@ -29,4 +29,5 @@ public class Lesson_video_pojo {
 
     @Autowired
     List<CoursesVideo> coursesVideo;
+
 }

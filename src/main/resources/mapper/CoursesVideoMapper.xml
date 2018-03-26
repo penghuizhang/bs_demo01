@@ -11,6 +11,13 @@
   <sql id="Base_Column_List">
     id, add_time, lesson_id, video_url, name
   </sql>
+
+  <select id="FindUrlByLessonInAndId" parameterType="map" resultType="com.bs.model.CoursesVideo">
+    select video_url,lesson_id,id from courses_video
+      where lesson_id=#{lesson_id} and id=#{id}
+  </select>
+
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -27,69 +34,7 @@
     values (#{id,jdbcType=INTEGER}, #{addTime,jdbcType=TIMESTAMP}, #{lessonId,jdbcType=INTEGER}, 
       #{videoUrl,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.bs.model.CoursesVideo">
-    insert into courses_video
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="addTime != null">
-        add_time,
-      </if>
-      <if test="lessonId != null">
-        lesson_id,
-      </if>
-      <if test="videoUrl != null">
-        video_url,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="addTime != null">
-        #{addTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lessonId != null">
-        #{lessonId,jdbcType=INTEGER},
-      </if>
-      <if test="videoUrl != null">
-        #{videoUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.bs.model.CoursesVideo">
-    update courses_video
-    <set>
-      <if test="addTime != null">
-        add_time = #{addTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lessonId != null">
-        lesson_id = #{lessonId,jdbcType=INTEGER},
-      </if>
-      <if test="videoUrl != null">
-        video_url = #{videoUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.bs.model.CoursesVideo">
-    update courses_video
-    set add_time = #{addTime,jdbcType=TIMESTAMP},
-      lesson_id = #{lessonId,jdbcType=INTEGER},
-      video_url = #{videoUrl,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
 
 
 </mapper>
