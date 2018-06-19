@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE generatorConfiguration
-        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
-
 <generatorConfiguration>
 
     <!--
@@ -21,7 +19,7 @@
         location属性指明加载jar/zip包的全路径
     -->
     <classPathEntry
-            location="D:\install\Repositories\Maven\mysql\mysql-connector-java\5.1.45\mysql-connector-java-5.1.45.jar"/>
+            location="D:\install\jar\mysql-connector-java-5.1.18-bin.jar"/>
 
     <!--
         context:生成一组对象的环境
@@ -57,9 +55,9 @@
 
         <!-- JDBC连接配置 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/mxonline"
+                        connectionURL="jdbc:mysql://localhost:3306/mxonline2"
                         userId="root"
-                        password="zhang123456"/>
+                        password="123456"/>
 
         <!--
             Java类型处理器

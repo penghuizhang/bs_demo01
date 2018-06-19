@@ -46,5 +46,10 @@ public class courseNoteServiceImpl implements courseNoteService {
         return courseNoteMapper.FindUserIdByOpenId(user_id);
     }
 
+    @Override
+    public List<Note_User_course_pojo> findNoteList4(Integer course_id) throws Exception {
+        return courseNoteMapper.findNoteList4(course_id);
+    }
+
 
 }

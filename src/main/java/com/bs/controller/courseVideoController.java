@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.ws.rs.GET;
+
 import java.util.HashMap;
 
 /**
  * Created by kylin on 2018/3/4.
  */
 @Api(description = "课程视频相关操作")
-@RestController
+
 public class courseVideoController {
 
     @Autowired

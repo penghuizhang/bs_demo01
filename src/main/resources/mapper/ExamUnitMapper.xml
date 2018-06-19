@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bs.mapper.ExamUnitMapper" >
+  <resultMap id="BaseResultMap" type="com.bs.model.Examunit" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="studentId" property="studentId" jdbcType="VARCHAR" />
+    <result column="choise_type" property="choise_type" jdbcType="VARCHAR" />
+    <result column="answer_a" property="answer_a" jdbcType="VARCHAR" />
+    <result column="answer_b" property="answer_b" jdbcType="VARCHAR" />
+    <result column="answer" property="answer" jdbcType="VARCHAR" />
+    <result column="add_time" property="add_time" jdbcType="TIMESTAMP" />
+    <result column="choise_name" property="choise_name" jdbcType="LONGVARCHAR" />
+    <result column="courseName_id" property="courseName_id" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, studentId, choise_type, answer_a, answer_b, answer, add_time, courseName_id,choise_name
+  </sql>
+
+  <select id="FindExamByCourseId" parameterType="java.lang.Integer" resultType="com.bs.model.Examunit">
+    SELECT
+      a.id, a.choise_type, a.choise_name, a.answer_a, a.answer_b, a.answer
+    FROM
+        exam_examunit a
+    WHERE
+        a.courseName_id = #{courseName_id,jdbcType=INTEGER}
+  </select>
+
+
+</mapper>

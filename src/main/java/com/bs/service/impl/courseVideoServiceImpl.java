@@ -2,6 +2,7 @@ package com.bs.service.impl;
 
 import com.bs.mapper.CoursesVideoMapper;
 import com.bs.model.CoursesVideo;
+import com.bs.model.pojo.send_message;
 import com.bs.service.courseVideoService;
 import com.bs.utils.constData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +30,15 @@ public class courseVideoServiceImpl implements courseVideoService {
         CoursesVideo coursesVideo = coursesVideoMapper.FindUrlByLessonInAndId(map);
         coursesVideo.setVideo_url(constData.serverResourseUrl+coursesVideo.getVideo_url());
         return coursesVideo;
+    }
+
+    @Override
+    public int selectVideoUpdate() throws Exception {
+        return coursesVideoMapper.selectVideoUpdate();
+    }
+
+    @Override
+    public List<send_message> send_message() throws Exception {
+        return coursesVideoMapper.send_message();
     }
 }

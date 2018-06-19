@@ -35,6 +35,14 @@
       #{videoUrl,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR})
   </insert>
 
+  <select id="selectVideoUpdate" resultType="java.lang.Integer">
+    select count(id) from courses_video
+  </select>
+
+
+  <select id="send_message" resultType="com.bs.model.pojo.send_message">
+    select a.tri_id,a.course_id, name from v_send_message a where a.flag is null
+  </select>
 
 
 </mapper>

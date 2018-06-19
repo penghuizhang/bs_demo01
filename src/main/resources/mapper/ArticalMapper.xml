@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bs.mapper.ArticalMapper" >
+  <resultMap id="BaseResultMap" type="com.bs.model.Artical" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="readnum" property="readnum" jdbcType="VARCHAR" />
+    <result column="pinglunnum" property="pinglunnum" jdbcType="VARCHAR" />
+    <result column="sharenum" property="sharenum" jdbcType="VARCHAR" />
+    <result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+
+
+  <select id="findShoujiList" resultType="com.bs.model.Artical">
+    SELECT
+      a.id,  a.title,  a.author, a.readNum,
+      a.pinglunNum, a.shareNum, a.content
+    FROM
+	  artical_artical a
+	ORDER BY addTime desc
+    LIMIT 0,7
+  </select>
+  <select id="addArticalListNum"  parameterType="java.lang.Integer" resultType="com.bs.model.Artical">
+      SELECT
+	    a.id, a.title, a.author, a.readNum, a.pinglunNum, a.shareNum, a.content
+      FROM
+	    artical_artical a
+      ORDER BY
+	    addTime DESC
+      LIMIT #{id} ,7
+  </select>
+  <select id="articalCount" resultType="java.lang.Integer">
+    select count(id) from artical_artical
+  </select>
+
+  <select id="getArticalDetail" parameterType="java.lang.Integer" resultType="com.bs.model.Artical">
+   SELECT
+	a.title,
+	a.author,
+	a.content,
+	a.addTime,
+	a.readNum,
+	a.shareNum
+  FROM
+	artical_artical a
+  WHERE
+	a.id = #{id}
+  </select>
+  <insert id="addReadNum" parameterType="java.lang.Integer">
+      UPDATE artical_artical set readNum = readNum+1 where  id= #{id}
+  </insert>
+</mapper>

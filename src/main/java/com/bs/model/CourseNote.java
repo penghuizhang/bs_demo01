@@ -1,7 +1,5 @@
 package com.bs.model;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -10,19 +8,65 @@ import java.util.Date;
  * Created by kylin on 2018/3/13.
  */
 @Component
-@Getter
-@Setter
 public class CourseNote {
 
     private Integer id;
 
-//    评论内容
-    private String note_message;
+    private String course;
 
-    private String add_time;
+    private String noteMessage;
 
-//    外键，用户id
-    private Integer user_id;
-//    评论的课程id
-    private Integer course;
+    private Date addTime;
+
+    private Integer userId;
+
+    private String wxopenid;
+
+    public String getWxopenid() {
+        return wxopenid;
+    }
+
+    public void setWxopenid(String wxopenid) {
+        this.wxopenid = wxopenid;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getCourse() {
+        return course;
+    }
+
+    public void setCourse(String course) {
+        this.course = course == null ? null : course.trim();
+    }
+
+    public String getNoteMessage() {
+        return noteMessage;
+    }
+
+    public void setNoteMessage(String noteMessage) {
+        this.noteMessage = noteMessage == null ? null : noteMessage.trim();
+    }
+
+    public Date getAddTime() {
+        return addTime;
+    }
+
+    public void setAddTime(Date addTime) {
+        this.addTime = addTime;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 }

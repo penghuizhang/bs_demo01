@@ -22,4 +22,8 @@ public interface CourseNoteMapper {
 
     //通过openid获取用户的user表主键
     Integer FindUserIdByOpenId(String user_id) throws Exception;
+
+
+    //    通过课程id获取该课程的4条评论
+    List<Note_User_course_pojo> findNoteList4(Integer course_id) throws Exception;
 }

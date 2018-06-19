@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bs.mapper.StudentProfileMapper" >
+    <resultMap id="BaseResultMap" type="com.bs.model.StudentProfile" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+        <result column="gender" property="gender" jdbcType="VARCHAR" />
+        <result column="city" property="city" jdbcType="VARCHAR" />
+        <result column="province" property="province" jdbcType="VARCHAR" />
+        <result column="country" property="country" jdbcType="VARCHAR" />
+        <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
+        <result column="userAccount" property="useraccount" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="study_course" property="study_course" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, nick_name, gender, city, province, country, image_url, userAccount
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from users_studentprofile
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+
+    <insert id="insertSelective" parameterType="com.bs.model.StudentProfile" >
+        insert into users_studentprofile
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="nickName != null" >
+                nick_name,
+            </if>
+            <if test="gender != null" >
+                gender,
+            </if>
+            <if test="city != null" >
+                city,
+            </if>
+            <if test="province != null" >
+                province,
+            </if>
+            <if test="country != null" >
+                country,
+            </if>
+            <if test="imageUrl != null" >
+                image_url,
+            </if>
+            <if test="useraccount != null" >
+                userAccount,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="nickName != null" >
+                #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null" >
+                #{gender,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null" >
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null" >
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="country != null" >
+                #{country,jdbcType=VARCHAR},
+            </if>
+            <if test="imageUrl != null" >
+                #{imageUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="useraccount != null" >
+                #{useraccount,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+
+    <!--查询第一次进行登录的用户有没有写入到数据库中，如果存在数据库中，就跳过，否者写入到数据库-->
+    <select id="selectOpenIdIsExist" parameterType="java.lang.String" resultType="com.bs.model.Userprofile">
+        select * from users_studentprofile where userAccount = #{useraccount,jdbcType=VARCHAR}
+    </select>
+
+    <update id="insertStudentToCourseStudentList" parameterType="Map">
+        update courses_course set user_list=CONCAT_WS(',',#{useraccount},user_list) where id = #{courseId}
+    </update>
+
+    <select id="finduserlistExistUserAccount" parameterType="java.lang.Integer" resultType="java.lang.String">
+          select user_list from courses_course where id = #{courseId,jdbcType=INTEGER}
+    </select>
+
+    <select id="FindUserIdByOpenId" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select id from users_studentprofile
+        where userAccount=#{userAccount,jdbcType=VARCHAR}
+    </select>
+
+
+
+    <insert id="insertUserEmail" parameterType="java.lang.String">
+        UPDATE users_studentprofile SET email = #{email}  WHERE userAccount=#{openId};
+    </insert>
+
+
+    <select id="findStudentEmailByOpenId" resultType="java.lang.String">
+        select email from users_studentprofile a where  a.userAccount = #{userAccount}
+    </select>
+
+    <update id="insertCourseToStudentProfile" parameterType="Map">
+        update users_studentprofile set study_course=CONCAT_WS(',',#{courseId},study_course) where userAccount = #{useraccount}
+    </update>
+
+    <select id="findStudentInforByOpenId" parameterType="java.lang.String" resultType="java.lang.String">
+        select  study_course from users_studentprofile where userAccount = #{useraccount}
+    </select>
+</mapper>

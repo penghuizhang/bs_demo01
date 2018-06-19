@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bs.mapper.commonMapper" >
+  <resultMap id="BaseResultMap" type="com.bs.model.FormId" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="formid" property="formid" jdbcType="VARCHAR" />
+
+  </resultMap>
+
+   <insert id="insertFormId" parameterType="com.bs.model.FormId">
+       insert into formId (formId) VALUES (#{formid})
+   </insert>
+
+    <select id="findFormId" resultType="com.bs.model.FormId">
+        select formid from formId ORDER BY id desc LIMIT 1
+    </select>
+</mapper>

@@ -1,17 +1,13 @@
 package com.bs.mapper;
 
 import com.bs.model.CoursesLesson;
+import com.bs.model.pojo.send_message;
+
+import java.util.List;
 
 public interface CoursesLessonMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(CoursesLesson record);
+    Integer findCourseIdByLessonId(Integer lesson_id) throws Exception;
 
-    int insertSelective(CoursesLesson record);
-
-    CoursesLesson selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(CoursesLesson record);
-
-    int updateByPrimaryKey(CoursesLesson record);
+    List<send_message> send_message(Integer course_id) throws Exception;
 }

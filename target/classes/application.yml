@@ -1,13 +1,11 @@
-#�˿�����
+#springboot基本配置相关信息
 server:
   port: 8888
-
-
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/mxonline?useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/mxonline2?useUnicode=true&characterEncoding=UTF-8
     username: root
-    password: zhang123456
+    password: 123456
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
   http:
@@ -16,15 +14,18 @@ spring:
       enabled: true
       force: true
 
-
-
-
+  mail:
+    host: smtp.163.com
+    username: 15890651564@163.com
+    password: admin123456
+    properties.mail.smtp.auth: true
+    properties.mail.smtp.starttls.enable: true
+    properties.mail.smtp.starttls.required: true
 mybatis:
   type-aliases-package: com.bs.model
   mapper-locations: classpath:mapper/*.xml
-
-
 logging:
   level: info
+
 
 

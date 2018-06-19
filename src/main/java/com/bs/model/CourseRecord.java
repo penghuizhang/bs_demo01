@@ -1,7 +1,5 @@
 package com.bs.model;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -10,8 +8,6 @@ import java.util.Date;
  * Created by kylin on 2018/3/9.
  */
 @Component
-@Getter
-@Setter
 public class CourseRecord {
 
 //    主键自增
@@ -31,4 +27,8 @@ public class CourseRecord {
 //
 ////    用户openid
 //    private String user_id;
+
+
+
+
 }

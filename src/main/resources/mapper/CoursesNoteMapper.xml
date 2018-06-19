@@ -2,21 +2,61 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bs.mapper.CourseNoteMapper">
   <resultMap id="BaseResultMap" type="com.bs.model.CourseNote">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="add_time" jdbcType="TIMESTAMP" property="add_time" />
-    <result column="course" jdbcType="INTEGER" property="course" />
-    <result column="user_id" jdbcType="INTEGER" property="user_id" />
-    <result column="note_message" jdbcType="VARCHAR" property="note_message" />
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="course" property="course" jdbcType="VARCHAR" />
+    <result column="note_message" property="noteMessage" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="DATE" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="wxopenid" property="wxopenid" jdbcType="VARCHAR"/>
   </resultMap>
   <sql id="Base_Column_List">
-    id, course, note_message,add_time,userAccount,user_id
+    id, course, note_message,add_time,userAccount,user_id,wxopenid
   </sql>
 
   <!--添加一条记录-->
   <insert id="addOneNote" parameterType="com.bs.model.CourseNote">
-    insert into operation_usernotecomment ( course, note_message,add_time, user_id)
-    values (#{course,jdbcType=INTEGER}, #{note_message,jdbcType=VARCHAR},
-      #{add_time,jdbcType=VARCHAR}, #{user_id,jdbcType=INTEGER})
+    insert into operation_usernotecomment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="course != null" >
+        course,
+      </if>
+      <if test="noteMessage != null" >
+        note_message,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="wxopenid != null">
+        wxopenid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="course != null" >
+        #{course,jdbcType=VARCHAR},
+      </if>
+      <if test="noteMessage != null" >
+        #{noteMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=DATE},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="wxopenid != null">
+        #{wxopenid, jdbcType=VARCHAR}
+      </if>
+    </trim>
+
   </insert>
 
 
@@ -28,20 +68,17 @@
 
 
   <select id="findNoteListByCourseId" parameterType="java.lang.Integer" resultType="com.bs.model.pojo.Note_User_course_pojo">
-    SELECT operation_usernotecomment.note_message, users_userprofile.image_url,users_userprofile.nick_name,
-            operation_usernotecomment.user_id,users_userprofile.id
-        FROM    operation_usernotecomment
-
-        INNER JOIN users_userprofile
-        ON operation_usernotecomment.user_id = users_userprofile.id
-    WHERE
-           operation_usernotecomment.course=#{course,jdbcType=INTEGER}
-    limit 0, 4
+   select users_studentprofile.nick_name,note_message,users_studentprofile.image_url, add_time from operation_usernotecomment left join users_studentprofile
+    on operation_usernotecomment.user_id = users_studentprofile.id
+    where operation_usernotecomment.course = #{course，jdbcType=INTEGER}
+    limit 0,4
   </select>
 
-
-  <select id="FindUserIdByOpenId" parameterType="java.lang.String" resultType="java.lang.Integer">
-    select id from users_userprofile
-       where userAccount=#{user_id,jdbcType=VARCHAR}
+  <!--获取前4条评论-->
+  <select id="findNoteList4" parameterType="java.lang.Integer" resultType="com.bs.model.pojo.Note_User_course_pojo">
+    select users_studentprofile.nick_name,note_message,users_studentprofile.image_url, add_time from operation_usernotecomment left join users_studentprofile
+    on operation_usernotecomment.user_id = users_studentprofile.id
+    where operation_usernotecomment.course = #{course，jdbcType=INTEGER}
+    ORDER BY operation_usernotecomment.id desc LIMIT 0,4
   </select>
 </mapper>

@@ -10,7 +10,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -39,7 +38,7 @@ public class categoryController {
      * @throws Exception
      */
     @ApiOperation("通过分类id获取该课程名称")
-    @GetMapping(value = "/course/category/lists/{id}")
+    @GetMapping(value = "course/category/lists/{id}")
     public Result CategoryCoursecategory(@PathVariable("id") Integer id ) throws Exception{
 
         String categoryName = categoryService.findCategoryNameById(id);
@@ -52,7 +51,7 @@ public class categoryController {
      * 通过id获取该分类下所有的课程
      */
     @ApiOperation(value = "通过分类id获取该分类下所有课程")
-    @GetMapping(value = "/course/category/{id}/lists")
+    @GetMapping(value = "course/category/{id}/lists")
     public Result<CategoryCourse> getCategoryCourse(@PathVariable("id") Integer id) throws Exception{
         return ResultUtil.success(categoryService.findCourseListById(id));
     }
@@ -62,7 +61,8 @@ public class categoryController {
      */
     @ApiOperation(value = "获取该系统课程分为哪些种类")
     @GetMapping(value = "course/category")
-    public Result findCourseListName() throws Exception{
-        return ResultUtil.success(categoryService.findCourseListName());
+    public List<CategoryCourse> findCourseListName() throws Exception{
+        List list = categoryService.findCourseListName();
+        return categoryService.findCourseListName();
     }
 }

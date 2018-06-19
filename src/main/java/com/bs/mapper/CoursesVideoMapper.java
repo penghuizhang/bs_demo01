@@ -1,8 +1,10 @@
 package com.bs.mapper;
 
 import com.bs.model.CoursesVideo;
+import com.bs.model.pojo.send_message;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public interface CoursesVideoMapper {
@@ -26,4 +28,8 @@ public interface CoursesVideoMapper {
 //    int updateByPrimaryKeySelective(CoursesVideo record);
 //
 //    int updateByPrimaryKey(CoursesVideo record);
+
+      int  selectVideoUpdate() throws Exception;
+
+      List<send_message> send_message() throws Exception;
 }

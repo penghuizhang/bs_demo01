@@ -16,149 +16,51 @@
     <result column="category" jdbcType="VARCHAR" property="category" />
     <result column="tag" jdbcType="VARCHAR" property="tag" />
     <result column="course_category_id" jdbcType="INTEGER" property="course_category_id" />
+    <result column="details" property="details" jdbcType="LONGVARCHAR" />
+    <result column="user_list" property="user_list" jdbcType="LONGVARCHAR" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.bs.model.Courses">
-    <result column="details" jdbcType="LONGVARCHAR" property="details" />
-  </resultMap>
+
   <sql id="Base_Column_List">
     id, name, description, degree, learn_time, students, favorite_student, image, click_numbers,
-    add_time, course_org_id, category, tag, course_category_id
+    add_time, course_org_id, category, tag, course_category_id,details, user_list
   </sql>
-  <sql id="Blob_Column_List">
-    details
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultType="com.bs.model.Courses">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from courses_course
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from courses_course
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.bs.model.Courses">
-    insert into courses_course (id, name, description, 
-      degree, learn_time, students, 
-      favorite_student, image, click_numbers, 
-      add_time, course_org_id, category, 
-      tag, course_category_id, details
-      )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{degree,jdbcType=VARCHAR}, #{learnTime,jdbcType=INTEGER}, #{students,jdbcType=INTEGER}, 
-      #{favoriteStudent,jdbcType=INTEGER}, #{image,jdbcType=VARCHAR}, #{clickNumbers,jdbcType=INTEGER}, 
-      #{addTime,jdbcType=TIMESTAMP}, #{courseOrgId,jdbcType=INTEGER}, #{category,jdbcType=VARCHAR}, 
-      #{tag,jdbcType=VARCHAR}, #{courseCategoryId,jdbcType=INTEGER}, #{details,jdbcType=LONGVARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.bs.model.Courses">
-    insert into courses_course
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="description != null">
-        description,
-      </if>
-      <if test="degree != null">
-        degree,
-      </if>
-      <if test="learnTime != null">
-        learn_time,
-      </if>
-      <if test="students != null">
-        students,
-      </if>
-      <if test="favoriteStudent != null">
-        favorite_student,
-      </if>
-      <if test="image != null">
-        image,
-      </if>
-      <if test="clickNumbers != null">
-        click_numbers,
-      </if>
-      <if test="addTime != null">
-        add_time,
-      </if>
-      <if test="courseOrgId != null">
-        course_org_id,
-      </if>
-      <if test="category != null">
-        category,
-      </if>
-      <if test="tag != null">
-        tag,
-      </if>
-      <if test="courseCategoryId != null">
-        course_category_id,
-      </if>
-      <if test="details != null">
-        details,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null">
-        #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="degree != null">
-        #{degree,jdbcType=VARCHAR},
-      </if>
-      <if test="learnTime != null">
-        #{learnTime,jdbcType=INTEGER},
-      </if>
-      <if test="students != null">
-        #{students,jdbcType=INTEGER},
-      </if>
-      <if test="favoriteStudent != null">
-        #{favoriteStudent,jdbcType=INTEGER},
-      </if>
-      <if test="image != null">
-        #{image,jdbcType=VARCHAR},
-      </if>
-      <if test="clickNumbers != null">
-        #{clickNumbers,jdbcType=INTEGER},
-      </if>
-      <if test="addTime != null">
-        #{addTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="courseOrgId != null">
-        #{courseOrgId,jdbcType=INTEGER},
-      </if>
-      <if test="category != null">
-        #{category,jdbcType=VARCHAR},
-      </if>
-      <if test="tag != null">
-        #{tag,jdbcType=VARCHAR},
-      </if>
-      <if test="courseCategoryId != null">
-        #{courseCategoryId,jdbcType=INTEGER},
-      </if>
-      <if test="details != null">
-        #{details,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
+
 
 
   <select id="FindCourseImageToLunbo" resultType="com.bs.model.Courses">
     select  image,id  from courses_course where lunBo = 1
   </select>
 
-  <select id="FindCourseByOrderTime" resultType="com.bs.model.Courses">
+  <select id="FindCourseByOrderTime" parameterType="java.lang.Integer" resultType="com.bs.model.Courses">
     select id, name, image, description, details,degree,students from courses_course
       GROUP BY id ORDER BY add_time DESC
       limit 0, 5
+  </select>
+
+  <select id="findCourseInforBylessonId" parameterType="java.lang.Integer" resultType="java.lang.String">
+    select courses_course.details from
+	  courses_course  LEFT JOIN courses_lesson on courses_course.id = courses_lesson.course_id
+	where  courses_lesson.id=#{id, jdbcType=INTEGER}
+  </select>
+
+
+  <select id="findStudentByCourseId" parameterType="java.lang.Integer" resultType="com.bs.model.Courses">
+    select * from  courses_course a where a.id=#{course_id, jdbcType=INTEGER}
+  </select>
+
+  <delete id="delete_triggerData">
+    UPDATE trigger_video1 set flag = 1;
+  </delete>
+
+
+  <select id="findCourseToMeList" parameterType="java.lang.String" resultType="com.bs.model.Courses">
+    select id,name,students,description,degree,image from courses_course where id = #{id}
   </select>
 </mapper>

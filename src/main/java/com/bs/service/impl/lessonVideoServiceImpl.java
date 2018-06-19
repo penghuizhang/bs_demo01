@@ -1,8 +1,12 @@
 package com.bs.service.impl;
 
+import com.bs.mapper.CoursesLessonMapper;
+import com.bs.mapper.CoursesMapper;
 import com.bs.mapper.pojo.course_video_mapper;
+import com.bs.model.CoursesLesson;
 import com.bs.model.CoursesVideo;
 import com.bs.model.pojo.Lesson_video_pojo;
+import com.bs.model.pojo.send_message;
 import com.bs.service.lessonVideoService;
 import com.bs.utils.constData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +26,9 @@ public class lessonVideoServiceImpl implements lessonVideoService {
 
     @Autowired
     private course_video_mapper courseVideoMapper;
+
+    @Autowired
+    private CoursesLessonMapper coursesLessonMapper;
 
     @Autowired
     private CoursesVideo coursesVideo;
@@ -57,4 +64,11 @@ public class lessonVideoServiceImpl implements lessonVideoService {
 
         return lesson_video_pojos;
     }
+
+    @Override
+    public Integer findCourseIdByLessonId(Integer lesson_id) throws Exception {
+        return coursesLessonMapper.findCourseIdByLessonId(lesson_id);
+    }
+
+
 }
